@@ -7,40 +7,52 @@ using ITalent_OOP.Enums;
 
 namespace ITalent_OOP
 {
-    internal class Car
+    internal class Car : Vehicle , ILandVehicle
     {
-        private int _year;
-        private CarMakes _make;
-        private int _horsePower;
-        private FuelTypes _fuelType;
-        private FuelTypes _type;
+        public CarMakes carMake { get; set; }
+        public CarTypes carType { get; set; }
+        public int shift { get; set; }
 
-        public int year 
+        public Car()
         {
-            get { return _year; }
-            set 
-            {
-                if (value < 1886 || value > 2022)
-                    return;
-                _year = value;
-            }
+
+        }
+        public Car(CarMakes carMake) 
+        {
+            carMake = carMake;
         }
 
-        public int horsepower
+        public Car(CarMakes carMake, CarTypes carType) : this(carMake)
         {
-            get { return _horsePower; }
-            set
-            {
-                if (value < 0)
-                    return;
-                _horsePower = value;
-            }
+            carType = carType;
         }
 
-        public CarMakes make { get; set; }
-        public FuelTypes fuelType { get; set; }
-        public CarTypes type { get; set; }
+        public Car(CarMakes carMake,CarTypes carType,int shift):this(carMake,carType)
+        {
+            shift = shift;
+        }
 
+        public void Horn()
+        {
+            Console.WriteLine("Kornaya Basıldı (Araba)");
+        }
+
+        public void Shift(int shiftValue)
+        {
+            shift = shiftValue;
+            Console.WriteLine("Vites Değiştirildi (Araba) Vites : " + shiftValue);
+        }
+
+        public override void SpeedIncrease(int value)
+        {
+            speed = value * 3;
+            Console.WriteLine("Hız Arttırıldı (Araba)");
+        }
+
+        public override string ToString()
+        {
+            return $"Yıl {year} + Yakıt Türü {fuelType} + Markası {carMake}";
+        }
 
     }
 }
